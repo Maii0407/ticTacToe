@@ -1,18 +1,23 @@
-//tic tac toe module
+//module for tic tac toe
 const ticTacToe = (function(){
-    const gameBoard = function(num){
-        const container = document.querySelector('.container');
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
-        cell.textContent = 'X';
+    const gameBoard = new Array(9);
 
-        container.appendChild('cell');
-    }
+    const _board = document.querySelector('.board');
+
+    const createBoard = function(){
+        for(i = 0; i < gameBoard.length; i++){
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.textContent = 'x';
+
+            _board.appendChild(cell);
+        }
+    };
 
     return{
         gameBoard,
-    }
-
+        createBoard,
+    };
 })();
 
-ticTacToe.gameBoard(9);
+ticTacToe.createBoard();

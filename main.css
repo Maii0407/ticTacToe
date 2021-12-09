@@ -1,3 +1,28 @@
 body {
     background-color: #121212;
 }
+
+.board-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    width: 400px;
+    height: 400px;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
+    border-radius: 100%;
+}
