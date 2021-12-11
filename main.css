@@ -65,3 +65,22 @@ body {
     cursor: pointer;
     padding-top: 20px;
 }
+
+.resetBtn {
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Fuzzy Bubbles', cursive;
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 50px;
+    opacity: 0.5;
+}
+
+.resetBtn:hover {
+    opacity: 1;
+}
