@@ -116,7 +116,8 @@ const ticTacToe = (function(){
            one.innerText === _playerOne.mark && five.innerText === _playerOne.mark && nine.innerText ===_playerOne.mark ||
            seven.innerText === _playerOne.mark && five.innerText === _playerOne.mark && three.innerText ===_playerOne.mark){
             
-            alert('lol');
+            winner = 'player1';
+            declareWinner();
         } else if(one.innerText === _playerTwo.mark && two.innerText === _playerTwo.mark && three.innerText ===_playerTwo.mark ||
                   four.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && six.innerText ===_playerTwo.mark ||
                   seven.innerText === _playerTwo.mark && eight.innerText === _playerTwo.mark && nine.innerText ===_playerTwo.mark ||
@@ -126,10 +127,23 @@ const ticTacToe = (function(){
                   one.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && nine.innerText ===_playerTwo.mark ||
                   seven.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && three.innerText ===_playerTwo.mark){
                 
+                  winner = _playerTwo;
                   alert('lol2');
         }else{
             return;
         }
+    };
+
+    //this section is for declaring winnner popup
+    let winner = 'none';
+    
+    const declareWinner = function(){
+        if(winner === 'player1'){
+            document.querySelector('.playerWin').style.display = 'block';
+        } else{
+            return;
+        }
+
     };
 
     //this section is a function for restarting the game
@@ -143,8 +157,8 @@ const ticTacToe = (function(){
         createBoard();
     };
 
-    const resetBtn = document.querySelector('.resetBtn');
-    resetBtn.addEventListener('click', _newGame);
+    const resetBtn = document.querySelectorAll('.resetBtn');
+    resetBtn.forEach((button) => button.addEventListener('click', _newGame));
 
     return{
         createBoard,
