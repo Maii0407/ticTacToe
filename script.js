@@ -23,9 +23,6 @@ const ticTacToe = (function(){
     //this also inserts a function inside each cell of gameboard so players can input marks
     const _board = document.querySelector('.board');
 
-    //variable to check moves and declare tie
-    let _moves = 0;
-
     const createBoard = function(){
         for(let obj of _gameBoard){
             let cell = document.createElement('div');
@@ -35,7 +32,6 @@ const ticTacToe = (function(){
                 if(_nextTurn === 'x'){
                     if(cell.innerText === ''){
                         cell.innerText = _playerOne.mark;
-                        _moves++;
                         _changeTurn();
                         _checkWin();
                     } else{
@@ -44,7 +40,6 @@ const ticTacToe = (function(){
                 } else{
                     if(cell.innerText === ''){
                         cell.innerText = _playerTwo.mark;
-                        _moves++;
                         _changeTurn();
                         _checkWin();
                     } else{
@@ -60,16 +55,21 @@ const ticTacToe = (function(){
     //this section is for determining current player turn
     let _nextTurn = 'x';
 
+    //variable to check moves and declare tie
+    let _moves = 0;
+
     const _changeTurn = function(){
         let playerOne = document.getElementById('X');
         let playerTwo = document.getElementById('O');
 
         if(_nextTurn === 'x'){
             _nextTurn = 'o';
+            _moves++;
             playerTwo.style.opacity = 1;
             playerOne.style.opacity = 0.5;
         } else{
             _nextTurn = 'x';
+            _moves++;
             playerOne.style.opacity = 1;
             playerTwo.style.opacity = 0.5;
         }
@@ -169,8 +169,9 @@ const ticTacToe = (function(){
         playerTwo.style.opacity = 0.5;
         _board.innerText = '';
         document.querySelector('.winCard').style.display = 'none';
+        _moves = 0;
         _nextTurn = 'x';
-        winner = 'none';
+        _winner = 'none';
         createBoard();
     };
 
