@@ -23,6 +23,9 @@ const ticTacToe = (function(){
     //this also inserts a function inside each cell of gameboard so players can input marks
     const _board = document.querySelector('.board');
 
+    //variable to check moves and declare tie
+    let _moves = 0;
+
     const createBoard = function(){
         for(let obj of _gameBoard){
             let cell = document.createElement('div');
@@ -32,6 +35,7 @@ const ticTacToe = (function(){
                 if(_nextTurn === 'x'){
                     if(cell.innerText === ''){
                         cell.innerText = _playerOne.mark;
+                        _moves++;
                         _changeTurn();
                         _checkWin();
                     } else{
@@ -40,6 +44,7 @@ const ticTacToe = (function(){
                 } else{
                     if(cell.innerText === ''){
                         cell.innerText = _playerTwo.mark;
+                        _moves++;
                         _changeTurn();
                         _checkWin();
                     } else{
@@ -116,8 +121,8 @@ const ticTacToe = (function(){
            one.innerText === _playerOne.mark && five.innerText === _playerOne.mark && nine.innerText ===_playerOne.mark ||
            seven.innerText === _playerOne.mark && five.innerText === _playerOne.mark && three.innerText ===_playerOne.mark){
             
-            winner = 'player1';
-            declareWinner();
+            _winner = 'player1';
+            _declareWinner();
         } else if(one.innerText === _playerTwo.mark && two.innerText === _playerTwo.mark && three.innerText ===_playerTwo.mark ||
                   four.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && six.innerText ===_playerTwo.mark ||
                   seven.innerText === _playerTwo.mark && eight.innerText === _playerTwo.mark && nine.innerText ===_playerTwo.mark ||
@@ -127,23 +132,32 @@ const ticTacToe = (function(){
                   one.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && nine.innerText ===_playerTwo.mark ||
                   seven.innerText === _playerTwo.mark && five.innerText === _playerTwo.mark && three.innerText ===_playerTwo.mark){
                 
-                  winner = _playerTwo;
-                  alert('lol2');
-        }else{
+                  _winner = 'player2';
+                  _declareWinner();
+        } else if(_moves === 9){
+            _winner = 'draw';
+            _declareWinner();
+        } else{
             return;
         }
     };
 
     //this section is for declaring winnner popup
-    let winner = 'none';
+    let _winner = 'none';
     
-    const declareWinner = function(){
-        if(winner === 'player1'){
-            document.querySelector('.playerWin').style.display = 'block';
+    const _declareWinner = function(){
+        if(_winner === 'player1'){
+            document.querySelector('.winCard').style.display = 'block';
+            document.querySelector('.winText').textContent = `${_playerOne.name} Wins!!!`;
+        } else if(_winner === 'player2'){
+            document.querySelector('.winCard').style.display = 'block';
+            document.querySelector('.winText').textContent = `${_playerTwo.name} Wins!!!`
+        } else if(_winner === 'draw'){
+            document.querySelector('.winCard').style.display = 'block';
+            document.querySelector('.winText').textContent = `It's a Draw T_T`;
         } else{
             return;
         }
-
     };
 
     //this section is a function for restarting the game
@@ -154,6 +168,9 @@ const ticTacToe = (function(){
         playerOne.style.opacity = 1;
         playerTwo.style.opacity = 0.5;
         _board.innerText = '';
+        document.querySelector('.winCard').style.display = 'none';
+        _nextTurn = 'x';
+        winner = 'none';
         createBoard();
     };
 
