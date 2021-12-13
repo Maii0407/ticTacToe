@@ -169,6 +169,7 @@ const ticTacToe = (function(){
         playerTwo.style.opacity = 0.5;
         _board.innerText = '';
         document.querySelector('.winCard').style.display = 'none';
+        _moves = 0;
         _nextTurn = 'x';
         winner = 'none';
         createBoard();
